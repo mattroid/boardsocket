@@ -98,9 +98,9 @@
           this.setState({board: nextProps.board})
         }
 
-        onClick(x, y, value) {
+        onClick(x, y) {
           return (e) => {
-            socket.emit('click', x, y, value)
+            socket.emit('click', x, y)
           }
         }
 
@@ -108,7 +108,7 @@
           return <div className='Board'>
             {this.state.board.map((a,x) => {
               return a.map((v,y) => {
-                return <Piece onClick={this.onClick(x, y, v).bind(this)} key={`${x}_${y}`} x={x} y={y} value={v}></Piece>
+                return <Piece onClick={this.onClick(x, y).bind(this)} key={`${x}_${y}`} x={x} y={y} value={v}></Piece>
               })
             })}
           </div>
@@ -118,6 +118,7 @@
       var board = []
       
       socket.on('board', (incoming_board, x, y) => {
+        console.log('board', incoming_board, x, y)
         if (x === undefined && y === undefined){
           board = incoming_board
         }else{
