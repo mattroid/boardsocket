@@ -25,7 +25,10 @@
       }
 
       .Board {
+        width: 1000px;
+        height: 1000px;
         overflow: hidden;
+        transform-origin: top left;
       }
 
       .Piece {
@@ -59,7 +62,8 @@
         animation-duration: 0.4s;
         animation-iteration-count: infinite;
         animation-timing-function: steps(12);
-        transform: scale3d(0.25,0.25,1) translate3d(-70%,-140%,0);
+        transform: scale3d(0.25,0.25,1);
+        transform-origin: 25% 0;
       }
 
     </style>
@@ -85,8 +89,9 @@
       class Board extends React.Component {
         constructor(props){
           super(props)
-          this.state = {board : props.board}
-
+          this.state = {
+            board : props.board
+          }
         }
 
         componentWillReceiveProps(nextProps){
@@ -120,7 +125,6 @@
         }
         ReactDOM.render(<Board board={board}></Board>, document.getElementById('app') )
       })
-
     </script>
   </body>
 </html>
