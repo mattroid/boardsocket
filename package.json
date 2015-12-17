@@ -1,0 +1,39 @@
+{
+  "name": "boardsocket",
+  "version": "1.0.0",
+  "description": "An isomorphic boardgame, using sockets",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notnullgames/boardsocket.git"
+  },
+  "keywords": [
+    "socket",
+    "board",
+    "game"
+  ],
+  "author": "David <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/notnullgames/boardsocket/issues"
+  },
+  "homepage": "https://github.com/notnullgames/boardsocket#readme",
+  "dependencies": {
+    "emitonoff": "0.0.8",
+    "react": "^0.14.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      {"presets": ["es2015","react"]}
+    ]
+}
