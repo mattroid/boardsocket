@@ -66,6 +66,14 @@
         transform-origin: 25% 0;
       }
 
+      .server-on {
+        background: green;
+      }
+
+      .server-off {
+        background: red;
+      }
+
     </style>
   </head>
   <body>
@@ -90,12 +98,13 @@
         constructor(props){
           super(props)
           this.state = {
-            board : props.board
+            board : props.board,
+            connected: props.connected
           }
         }
 
         componentWillReceiveProps(nextProps){
-          this.setState({board: nextProps.board})
+          this.setState({board: nextProps.board, connected: nextProps.connected})
         }
 
         onClick(x, y) {
@@ -105,7 +114,7 @@
         }
 
         render (){
-          return <div className='Board'>
+          return <div className={`Board server-${this.state.connected ? 'on' : 'off'}`}>
             {this.state.board.map((a,x) => {
               return a.map((v,y) => {
                 return <Piece onClick={this.onClick(x, y).bind(this)} key={`${x}_${y}`} x={x} y={y} value={v}></Piece>
@@ -116,7 +125,18 @@
       }
 
       var board = []
-      
+      var connected = false
+
+      socket.on('disconnect', () => {
+        connected = false
+        ReactDOM.render(<Board connected={connected} board={board}></Board>, document.getElementById('app') )
+      })
+
+      socket.on('connect', () => {
+        connected = true
+        ReactDOM.render(<Board connected={connected} board={board}></Board>, document.getElementById('app') )
+      })
+
       socket.on('board', (incoming_board, x, y) => {
         console.log('board', incoming_board, x, y)
         if (x === undefined && y === undefined){
@@ -124,7 +144,7 @@
         }else{
           board[x][y] = incoming_board
         }
-        ReactDOM.render(<Board board={board}></Board>, document.getElementById('app') )
+        ReactDOM.render(<Board connected={connected} board={board}></Board>, document.getElementById('app') )
       })
     </script>
   </body>
