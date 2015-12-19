@@ -23,7 +23,9 @@
   "homepage": "https://github.com/notnullgames/boardsocket#readme",
   "dependencies": {
     "emitonoff": "0.0.8",
-    "react": "^0.14.3"
+    "express": "^4.13.3",
+    "react": "^0.14.3",
+    "socket.io": "^1.3.7"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
@@ -34,7 +36,12 @@
   "browserify": {
     "transform": [
       "babelify",
-      {"presets": ["es2015","react"]}
+      {
+        "presets": [
+          "es2015",
+          "react"
+        ]
+      }
     ]
   }
 }
