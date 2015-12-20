@@ -10,7 +10,7 @@ var socket = io.connect()
 
 var board = []
 var connected = false
-var playerNum = 0;
+var playerNum = 0
 
 socket.on('disconnect', () => {
   connected = false
@@ -35,6 +35,10 @@ socket.on('board', (incoming_board, x, y) => {
   renderApp();
 })
 
+function onClick(x,y,playerNum){
+  socket.emit('click', x, y, playerNum)
+}
+
 function renderApp(){
-  ReactDOM.render(<Board connected={connected} board={board} playerNum={playerNum}></Board>, document.getElementById('app') )
+  ReactDOM.render(<Board onClick={onClick} connected={connected} board={board} playerNum={playerNum}></Board>, document.getElementById('app') )
 }

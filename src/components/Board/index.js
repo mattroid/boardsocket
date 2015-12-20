@@ -2,6 +2,8 @@ import React from 'react'
 
 import Piece from '../Piece'
 
+require('./index.css')
+
 export default class Board extends React.Component {
   constructor(props) {
     super(props)
@@ -18,8 +20,7 @@ export default class Board extends React.Component {
 
   onClick(x, y) {
     return (e) => {
-      console.log('clicking for player' + playerNum)
-      socket.emit('click', x, y, playerNum)
+      this.props.onClick(x,y,this.state.playerNum)
     }
   }
 

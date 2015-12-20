@@ -1,5 +1,7 @@
 import React from 'react'
 
+require('./index.css')
+
 export default class Piece extends React.Component {
   constructor(props) {
     super(props)

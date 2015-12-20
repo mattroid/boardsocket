@@ -4,7 +4,6 @@ import sio from 'socket.io'
 import browserify from 'browserify-middleware'
 import babelify from 'babelify'
 import css from 'browserify-css'
-import pkg from './package.json'
 
 const app = express()
 const server = http.createServer(app)
@@ -31,9 +30,7 @@ function updatePlayer(x, y, playerNum){
   players[playerNum].y = y
 }
 
-app.get('/bundle.js', browserify(__dirname + '/index.js', {
-  noParse: Object.keys(pkg.dependencies)
-}))
+app.get('/bundle.js', browserify(__dirname + '/index.js'))
 
 app.use(express.static(__dirname + '/../public'))
 
