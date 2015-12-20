@@ -11,9 +11,7 @@ const port = process.env.PORT || 8000
 // MODEL - these could be stored persistantly...
 
 // build server-side representation of current board (10x10 of 0's)
-var row = []
-for (let i = 10; i--; i) { row.push(0) }
-const board = row.map(() => { return row.slice() })
+const board = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0).map((v, i, row) => { return row.slice() })
 
 // map of socket ID to fingerprint
 var players = {}
@@ -24,7 +22,6 @@ var player_info = {}
 // /MODEL
 
 app.get('/bundle.js', browserify(__dirname + '/../index.js'))
-
 app.use(express.static(__dirname + '/../../public'))
 
 io.on('connection', (socket) => {
