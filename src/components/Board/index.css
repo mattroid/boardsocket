@@ -4,3 +4,13 @@
   overflow: hidden;
   transform-origin: top left;
 }
+
+.Board > .key {
+  clear: both;
+}
+
+.Board > .key > i {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+}

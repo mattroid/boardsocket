@@ -10,11 +10,20 @@ const server = http.createServer(app)
 const io = sio.listen(server)
 const port = process.env.PORT || 8000
 
+// MODEL - these could be stored persistantly...
 
 // build server-side representation of current board (10x10 of 0's)
 var row = []
-for (var i=10;i--;i){ row.push(0) }
-var board = row.map(() => { return row.slice() })
+for (let i=10;i--;i){ row.push(0) }
+const board = row.map(() => { return row.slice() })
+
+// map of socket ID to fingerprint
+var players = {}
+
+// map of fingerprint to player-data
+var player_info = {}
+
+// /MODEL
 
 app.get('/bundle.js', browserify(__dirname + '/index.js'))
 
@@ -23,10 +32,34 @@ app.use(express.static(__dirname + '/../public'))
 io.on('connection', (socket) => {
   socket.emit('board', board)
 
-  socket.on('click', (x,y) => {
-    console.log('click', x, y, socket.id)
+  socket.on('fingerprint', (id, fn) => {
+    players[socket.id] = id
+    if (!player_info[id]){
+      player_info[id] = {
+        color: '#' + Math.floor(Math.random()*16777215).toString(16),
+        position: [0,0]
+      }
+    }
+    fn(player_info[id])
+    io.sockets.emit('board', player_info[id], player_info[id].position[0], player_info[id].position[1])
+  })
+
+  socket.on('click', (x, y) => {
+    var player = player_info[players[socket.id]]
+    if (board[x][y] === 0){
+      if (player){
+        board[player.position[0]][player.position[1]] = 0
+        io.sockets.emit('board', 0, player.position[0], player.position[1])
+      }
+      player_info[players[socket.id]].position = [x, y]
+      io.sockets.emit('board', player_info[players[socket.id]], x, y)
+    }
+  })
+
+  socket.on('disconnect', () => {
+    delete players[socket.id]
   })
 })
 
-console.log('Webserver running on http://localhost:' + port)
+console.log('Server running on http://localhost:' + port)
 server.listen(port)

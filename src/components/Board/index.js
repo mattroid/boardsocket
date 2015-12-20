@@ -1,4 +1,5 @@
 import React from 'react'
+import Fingerprint from 'fingerprintjs2'
 
 import Piece from '../Piece'
 import socket from '../../socket'
@@ -10,10 +11,20 @@ export default class Board extends React.Component {
     super(props)
     this.state = {
       board: [],
-      playerNum: props.playerNum,
-      connected: props.connected
+      player: {}
     }
     this.onBoard = this.onBoard.bind(this)
+    this.onPlayer = this.onPlayer.bind(this)
+
+    // stored fingerprint
+    if (!localStorage.fingerprint){
+      new Fingerprint().get((result, components) => {
+        localStorage.fingerprint = result
+        socket.emit('fingerprint', localStorage.fingerprint, this.onPlayer)
+      })
+    }else{
+      socket.emit('fingerprint', localStorage.fingerprint, this.onPlayer)
+    }
   }
 
   componentWillMount() {
@@ -26,6 +37,10 @@ export default class Board extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({playerNum: nextProps.playerNum, board: nextProps.board, connected: nextProps.connected})
+  }
+
+  onPlayer(player) {
+    this.setState({player: player})
   }
 
   onBoard(incoming_board, x, y) {
@@ -44,6 +59,9 @@ export default class Board extends React.Component {
   }
 
   render() {
+    var keyStyle = {
+      backgroundColor:this.state.player.color
+    }
     return (
       <div className='Board'>
         {this.state.board.map((a, x) => {
@@ -51,6 +69,7 @@ export default class Board extends React.Component {
             return <Piece onClick={this.onClick(x, y)} key={`${x}_${y}`} x={x} y={y} value={v}></Piece>
           })
         })}
+        <div className='key'>You are <i style={keyStyle}></i>.</div>
       </div>
     )
   }
