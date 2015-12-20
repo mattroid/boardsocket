@@ -20,6 +20,7 @@ import ReactDOMServer from 'react-dom/server'
 import Board from '../components/Board'
 const template = fs.readFileSync(__dirname + '/../../public/index.html')
 app.get('/', (req, res) => {
+  // TODO: use express-react-views
   var t = template.toString()
   var markup = ReactDOMServer.renderToString(<Board />)
   res.send(t.replace('<div id="app"></div>', `<div id="app">${markup}</div>`))
