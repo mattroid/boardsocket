@@ -1,0 +1,44 @@
+.Piece {
+  border: 1px solid #000;
+  width: 100px;
+  height: 100px;
+  float: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;       
+}
+
+.Piece:nth-child(10n+1) {
+  clear:left;
+}
+
+@keyframes glyph1-run {
+  from { background-position-x: 0; }
+  to { background-position-x: -1980px; }
+}
+
+.glyph1, .glyph2, .glyph3 {
+  height: 294px;
+  width: 165px;
+  background-image: url(http://www.fabiobiondi.com/blog/wp-content/uploads/2012/08/runningGrant.png);
+  background-position: 0 0;
+  animation-name: glyph1-run;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(12);
+  transform: scale3d(0.25,0.25,1);
+  transform-origin: 25% 0;
+}
+
+.player1{
+  background-color:red;
+}
+.player2{
+  background-color:yellow;
+}
+.player3{
+  background-color:blue;
+}

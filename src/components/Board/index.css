@@ -1,0 +1,14 @@
+.Board {
+  width: 1000px;
+  height: 1000px;
+  overflow: hidden;
+  transform-origin: top left;
+}
+
+.server-on {
+  background: green;
+}
+
+.server-off {
+  background: red;
+}
