@@ -1,9 +1,13 @@
 /* global describe it */
-
 import {assert} from 'chai'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
+import Player from './index.js'
 
 describe('Player', () => {
-  it('dummy test', () => {
-    assert.ok('everything', 'everything is ok')
+  it('should instanciate and pass prop to state', () => {
+    var player = {color: '#ababcc'}
+    var renderedComponent = TestUtils.renderIntoDocument(<Player player={player} />)
+    assert.equal(player.color, renderedComponent.state.color)
   })
 })
