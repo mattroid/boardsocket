@@ -40,8 +40,10 @@ io.on('connection', (socket) => {
         position: [0,0]
       }
     }
-    fn(player_info[id])
-    io.sockets.emit('board', player_info[id], player_info[id].position[0], player_info[id].position[1])
+    var p = player_info[id]
+    fn(p)
+    board[p.position[0]][p.position[1]] = p
+    io.sockets.emit('board', p, p.position[0], p.position[1])
   })
 
   socket.on('click', (x, y) => {

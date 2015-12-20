@@ -7,10 +7,12 @@
 
 .Board > .key {
   clear: both;
+  padding-top: 10px;
 }
 
 .Board > .key > i {
   display: inline-block;
-  height: 10px;
-  width: 10px;
+  height: 1em;
+  width: 1em;
+  border: 1px solid #000;
 }

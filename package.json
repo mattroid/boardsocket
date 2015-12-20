@@ -28,7 +28,6 @@
     "babelify": "^7.2.0",
     "browserify-css": "^0.8.3",
     "browserify-middleware": "^7.0.0",
-    "emitonoff": "0.0.8",
     "express": "^4.13.3",
     "fingerprintjs2": "^1.0.1",
     "react": "^0.14.3",
