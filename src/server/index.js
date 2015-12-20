@@ -11,7 +11,13 @@ const port = process.env.PORT || 8000
 // MODEL - these could be stored persistantly...
 
 // build server-side representation of current board (10x10 of 0's)
-const board = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0).map((v, i, row) => { return row })
+const board = new Array(10)
+for (let x = 10; x--; x) {
+  board[x] = new Array(10)
+  for (let y = 10; y--; y) {
+    board[x][y] = 0
+  }
+}
 
 // map of socket ID to fingerprint
 var players = {}
