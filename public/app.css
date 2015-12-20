@@ -1,0 +1,58 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: sans-serif;
+  width: 100%;
+  height: 100%;
+  margin:0;
+  padding:0;
+}
+
+.Board {
+  width: 1000px;
+  height: 1000px;
+  overflow: hidden;
+  transform-origin: top left;
+}
+
+.Board > .key {
+  clear: both;
+  padding-top: 10px;
+}
+
+.Board > .key > i {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border: 1px solid #000;
+}
+
+.Piece {
+  border: 1px solid #000;
+  width: 50px;
+  height: 50px;
+  float: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;       
+}
+
+.Piece:nth-child(10n+1) {
+  clear:left;
+}
+
+.Player {
+  height: 20px;
+  width: 20px;
+  background: #000;
+  margin: 12.5px;
+  border: 1px solid #000;
+}

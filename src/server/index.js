@@ -1,3 +1,4 @@
+import fs from 'fs'
 import express from 'express'
 import http from 'http'
 import sio from 'socket.io'
@@ -6,7 +7,7 @@ import browserify from 'browserify-middleware'
 const app = express()
 const server = http.createServer(app)
 const io = sio.listen(server)
-const port = process.env.PORT || 8000
+process.env.PORT = process.env.PORT || 8000
 
 // MODEL - these could be stored persistantly...
 
@@ -26,6 +27,17 @@ var players = {}
 var player_info = {}
 
 // /MODEL
+
+// isomorphic route
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import Board from '../components/Board'
+const template = fs.readFileSync(__dirname + '/../../public/index.html')
+app.get('/', (req, res) => {
+  var t = template.toString()
+  var markup = ReactDOMServer.renderToString(<Board />)
+  res.send(t.replace('<div id="app"></div>', `<div id="app">${markup}</div>`))
+})
 
 app.get('/bundle.js', browserify(__dirname + '/../index.js'))
 app.use(express.static(__dirname + '/../../public'))
@@ -64,5 +76,5 @@ io.on('connection', (socket) => {
   })
 })
 
-console.log('Server running on http://localhost:' + port)
-server.listen(port)
+console.log('Server running on http://localhost:' + process.env.PORT)
+server.listen(process.env.PORT)

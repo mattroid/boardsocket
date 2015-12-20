@@ -1,7 +1,5 @@
 import React from 'react'
 
-require('./index.css')
-
 export default class Player extends React.Component {
   render () {
     return (

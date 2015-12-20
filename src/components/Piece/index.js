@@ -2,8 +2,6 @@ import React from 'react'
 
 import Player from '../Player'
 
-require('./index.css')
-
 export default class Piece extends React.Component {
   constructor (props) {
     super(props)

@@ -1,62 +1,30 @@
-/* global localStorage */
-
 import React from 'react'
-import Fingerprint from 'fingerprintjs2'
 
 import Piece from '../Piece'
-import socket from '../../socket'
 
-require('./index.css')
-
-export default class Board extends React . Component {
+export default class Board extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      board: [],
-      player: {}
+      board: props.board,
+      player: props.player
     }
-    this.onBoard = this.onBoard.bind(this)
-    this.onPlayer = this.onPlayer.bind(this)
-
-    // stored fingerprint
-    if (!localStorage.fingerprint) {
-      new Fingerprint().get((result, components) => {
-        localStorage.fingerprint = result
-        socket.emit('fingerprint', localStorage.fingerprint, this.onPlayer)
-      })
-    } else {
-      socket.emit('fingerprint', localStorage.fingerprint, this.onPlayer)
-    }
-  }
-
-  componentWillMount () {
-    socket.on('board', this.onBoard)
-  }
-
-  componentWillUnmount () {
-    socket.removeListener('board', this.onBoard)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({playerNum: nextProps.playerNum, board: nextProps.board, connected: nextProps.connected})
-  }
-
-  onPlayer (player) {
-    this.setState({player: player})
-  }
-
-  onBoard (incoming_board, x, y) {
-    if (x === undefined && y === undefined) {
-      this.setState({board: incoming_board})
-    } else {
-      this.state.board[x][y] = incoming_board
-      this.setState({board: this.state.board})
+    var newProps = {}
+    if (nextProps.board) {
+      newProps.board = nextProps.board
     }
+    if (nextProps.player) {
+      newProps.player = nextProps.player
+    }
+    this.setState(newProps)
   }
 
   onClick (x, y) {
     return (e) => {
-      socket.emit('click', x, y)
+      this.props.onClick(x, y)
     }
   }
 
@@ -75,4 +43,16 @@ export default class Board extends React . Component {
       </div>
     )
   }
+}
+
+Board.propTypes = {
+  board: React.PropTypes.array,
+  player: React.PropTypes.object,
+  onClick: React.PropTypes.func
+}
+
+Board.defaultProps = {
+  board: [],
+  player: {},
+  onClick: (x, y) => {}
 }
