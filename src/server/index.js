@@ -23,9 +23,9 @@ var player_info = {}
 
 // /MODEL
 
-app.get('/bundle.js', browserify(__dirname + '/index.js'))
+app.get('/bundle.js', browserify(__dirname + '/../index.js'))
 
-app.use(express.static(__dirname + '/../public'))
+app.use(express.static(__dirname + '/../../public'))
 
 io.on('connection', (socket) => {
   socket.emit('board', board)
