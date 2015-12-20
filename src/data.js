@@ -1,4 +1,8 @@
-// build server-side representation of current board (10x10 of 0's)
+/**
+ * Shared data
+ */
+
+// representation of current board (10x10 of 0's)
 export const board = new Array(10)
 for (let x = 10; x--; x) {
   board[x] = new Array(10)
