@@ -40,9 +40,7 @@ export default class Board extends React.Component {
   }
 
   onPlayer(player) {
-    var board = this.state.board
-    board[player.position[0]][player.position[1]] = player
-    this.setState({player: player, board: board})
+    this.setState({player: player})
   }
 
   onBoard(incoming_board, x, y) {
