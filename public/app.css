@@ -14,15 +14,21 @@ body {
 }
 
 .Board {
-  width: 1000px;
-  height: 1000px;
+}
+
+.Board > .pieces {
+  margin: 20px auto;
+  width: 502px;
+  height: 502px;
   overflow: hidden;
   transform-origin: top left;
+  border: 1px solid #000;
 }
 
 .Board > .key {
   clear: both;
   padding-top: 10px;
+  text-align: center;
 }
 
 .Board > .key > i {

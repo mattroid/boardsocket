@@ -34,11 +34,13 @@ export default class Board extends React.Component {
     }
     return (
       <div className='Board'>
-        {this.state.board.map((a, x) => {
-          return a.map((v, y) => {
-            return <Piece onClick={this.onClick(x, y)} key={`${x}_${y}`} x={x} y={y} value={v} />
-          })
-        })}
+        <div className='pieces'>
+          {this.state.board.map((a, x) => {
+            return a.map((v, y) => {
+              return <Piece onClick={this.onClick(x, y)} key={`${x}_${y}`} x={x} y={y} value={v} />
+            })
+          })}
+        </div>
         <div className='key'>You are <i style={keyStyle}></i>.</div>
       </div>
     )

@@ -14,7 +14,7 @@ import Board from './components/Board'
 const socket = io(window.location.origin)
 var player = {}
 
-// stored fingerprint
+// stored fingerprint is key of player_info
 if (!localStorage.fingerprint) {
   new Fingerprint().get((result, components) => {
     localStorage.fingerprint = result
