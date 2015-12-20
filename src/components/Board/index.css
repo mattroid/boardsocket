@@ -4,11 +4,3 @@
   overflow: hidden;
   transform-origin: top left;
 }
-
-.server-on {
-  background: green;
-}
-
-.server-off {
-  background: red;
-}
