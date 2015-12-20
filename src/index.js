@@ -5,4 +5,4 @@ import Board from './components/Board'
 
 require('./index.css')
 
-ReactDOM.render(<Board></Board>, document.getElementById('app') )
+ReactDOM.render(<Board />, document.getElementById('app'))

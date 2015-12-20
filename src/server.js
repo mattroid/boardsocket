@@ -2,8 +2,6 @@ import express from 'express'
 import http from 'http'
 import sio from 'socket.io'
 import browserify from 'browserify-middleware'
-import babelify from 'babelify'
-import css from 'browserify-css'
 
 const app = express()
 const server = http.createServer(app)
@@ -14,7 +12,7 @@ const port = process.env.PORT || 8000
 
 // build server-side representation of current board (10x10 of 0's)
 var row = []
-for (let i=10;i--;i){ row.push(0) }
+for (let i = 10; i--; i) { row.push(0) }
 const board = row.map(() => { return row.slice() })
 
 // map of socket ID to fingerprint
@@ -34,10 +32,10 @@ io.on('connection', (socket) => {
 
   socket.on('fingerprint', (id, fn) => {
     players[socket.id] = id
-    if (!player_info[id]){
+    if (!player_info[id]) {
       player_info[id] = {
-        color: '#' + Math.floor(Math.random()*16777215).toString(16),
-        position: [0,0]
+        color: '#' + Math.floor(Math.random() * 16777215).toString(16),
+        position: [0, 0]
       }
     }
     var p = player_info[id]
@@ -48,8 +46,8 @@ io.on('connection', (socket) => {
 
   socket.on('click', (x, y) => {
     var player = player_info[players[socket.id]]
-    if (board[x][y] === 0){
-      if (player){
+    if (board[x][y] === 0) {
+      if (player) {
         board[player.position[0]][player.position[1]] = 0
         io.sockets.emit('board', 0, player.position[0], player.position[1])
       }
