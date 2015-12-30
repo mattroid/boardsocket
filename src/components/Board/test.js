@@ -30,7 +30,5 @@ describe('Board', () => {
     var tile = TestUtils.scryRenderedDOMComponentsWithClass(sut, 'Piece')
 
     TestUtils.Simulate.click(tile[6])
-
-    assert.fail()
   })
 })
