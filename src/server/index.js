@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.get('/bundle.js', browserify(__dirname + '/../index.js'))
 app.use(express.static(__dirname + '/../../public'))
 
-io.on('connection', (socket) => {
+export io.on('connection', (socket) => {
   socket.on('fingerprint', (id, fn) => {
     players[socket.id] = id
     if (!player_info[id]) {

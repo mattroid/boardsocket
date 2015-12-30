@@ -11,4 +11,7 @@ describe('Player', () => {
     var renderedComponent = TestUtils.renderIntoDocument(<Player player={player} />)
     assert.equal(player.color, renderedComponent.props.player.color)
   })
+  it('should recognize a player based on finger print', () => {
+
+  })
 })
