@@ -20,10 +20,11 @@ describe('Board', () => {
   })
   it('should move player to new location when piece is clicked', (done) => {
     var onClick = (x, y) => {
+      assert.notEqual([x, y], [0, 0])
       done()
     }
-    var player = {color: '#ababcc'}
-    var board = [[1, 2, 3], [1, 2, 3], [1, 2, 3]]
+    var player = {color: '#ababcc', position: [0, 0]}
+    var board = [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
     var sut = TestUtils.renderIntoDocument(
         <Board board={board} player={player} onClick={onClick} />
     )
