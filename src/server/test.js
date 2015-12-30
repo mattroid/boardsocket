@@ -27,6 +27,8 @@ describe('Server', () => {
         var color2 = player.color
 
         assert.notEqual(color1, color2)
+        client2.disconnect()
+        client.disconnect()
         done()
       })
     })
