@@ -61,5 +61,10 @@ io.on('connection', (socket) => {
   })
 })
 
-console.log('Server running on http://localhost:' + process.env.PORT)
-server.listen(process.env.PORT)
+if (require.main === module) {
+  console.log('Server running on http://localhost:' + process.env.PORT)
+  server.listen(process.env.PORT)
+}
+
+module.exports = server
+module.exports.io = io
