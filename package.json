@@ -4,8 +4,8 @@
   "description": "An isomorphic boardgame, using sockets",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node --presets es2015 -- src/server",
-    "test": "standard && mocha --require ./test/setup.js --compilers js:babel-core/register src/**/test.js",
+    "start": "babel-node -- src/server",
+    "test": "standard && babel-node -- test.js",
     "watch:test": "watch 'npm test' src/",
     "watch": "parallelshell 'npm run watch:test' 'npm start'"
   },
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "glob": "^6.0.3",
     "jsdom": "^7.2.1",
     "mocha": "^2.3.4",
     "parallelshell": "^2.0.0",
